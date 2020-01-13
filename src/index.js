@@ -1,12 +1,20 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
+import React from "react";
+import ReactDOM from "react-dom";
+import { combineReducers, createStore } from "redux";
+import { Provider } from "react-redux";
+import Counter from "./counter";
+import counterReducer from "./counterReducer";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const elemento = document.getElementById("root");
+const reducers = combineReducers({
+  counter: counterReducer
+});
 
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+ReactDOM.render(
+  <div>
+    <Provider store={createStore(reducers)}>
+      <Counter />
+    </Provider>
+  </div>,
+  elemento
+);
